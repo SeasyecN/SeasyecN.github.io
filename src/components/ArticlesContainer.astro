@@ -1,0 +1,22 @@
+---
+import RetroCard from './RetroCard.jsx';
+
+interface Post {
+  id: number;
+  title: string;
+  date: string;
+  desc: string;
+}
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="w-full max-w-[600px] px-4 space-y-8 pb-20">
+  {posts.map((post) => (
+    <RetroCard client:visible {...post} />
+  ))}
+</div>
