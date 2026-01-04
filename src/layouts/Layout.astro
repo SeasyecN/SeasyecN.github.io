@@ -1,6 +1,8 @@
 ---
 // src/layouts/Layout.astro
-import '../styles/global.css';
+import "../styles/global.css";
+import RetroBackground from "../components/RetroBackground.astro";
+import Header from "../components/Header.astro";
 
 interface Props {
   title: string;
@@ -14,29 +16,40 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
-  <body class="bg-[#222] font-pixel text-[#2f2f2f] overflow-x-hidden min-h-screen">
-    <slot />
+  <body
+    class="bg-[#222] font-pixel text-[#2f2f2f] overflow-x-hidden min-h-screen"
+  >
+    <!-- 背景层 -->
+    <RetroBackground />
+    <!-- 内容层 -->
+    <div class="relative z-10 min-h-screen flex flex-col items-center">
+      <Header>010</Header>
+      <slot />
+    </div>
   </body>
 </html>
 
 <style is:global>
-/* 定义全局像素字体 */
-.font-pixel {
-  font-family: 'Press Start 2P', cursive;
-}
+  /* 定义全局像素字体 */
+  .font-pixel {
+    font-family: "Press Start 2P", cursive;
+  }
 
-/* 定义复古滚动条 */
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: #222;
-}
-::-webkit-scrollbar-thumb {
-  background: #ff6b6b;
-  border: 2px solid #2f2f2f;
-}
+  /* 定义复古滚动条 */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #222;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ff6b6b;
+    border: 2px solid #2f2f2f;
+  }
 </style>

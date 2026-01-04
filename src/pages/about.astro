@@ -1,16 +1,68 @@
-<html lang="zh-CN">
-  <head>
-    <!-- 关键就是下面这一行 -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>关于我</title>
-  </head>
-  <body>
-    <h1>我的 Astro 网站</h1>
-    <h1>关于我</h1>
-    <h2>……和我的新 Astro 网站！</h2>
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
 
-    <p>我正在学习 Astro 的入门教程。这是我网站上的第二个页面，也是我自己建立的第一页面！</p>
-    <p>随着我完成更多教程，该站点将更新，所以请继续查看我的旅程将如何进行吧！</p>
-  </body>
-</html>
+
+// 获取 'pages' 集合中的 'about' 条目
+const aboutPage = await getEntry('pages', 'about');
+
+if (!aboutPage) {
+  throw new Error('Could not find about page');
+}
+
+const { Content } = await aboutPage.render();
+---
+
+<Layout title={aboutPage.data.title}>
+  <!-- 背景层 -->
+  
+  
+ 
+
+    <main class="w-full max-w-[800px] px-6 py-12">
+      <div class="bg-white border-4 border-[#2f2f2f] p-8 shadow-[8px_8px_0px_0px_#2f2f2f]">
+        <h1 class="text-3xl mb-6 text-[#2f2f2f] font-bold" style="font-family: 'Press Start 2P', cursive;">
+          {aboutPage.data.title}
+        </h1>
+        
+        <!-- Markdown 内容区域 -->
+        <article class="prose prose-slate max-w-none font-mono">
+          <Content />
+        </article>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/" class="inline-block bg-[#ff6b6b] text-white px-6 py-3 border-4 border-[#2f2f2f] shadow-[4px_4px_0px_0px_#2f2f2f] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#2f2f2f] active:translate-y-[4px] active:shadow-none transition-all font-bold">
+          &lt;&lt; HOME
+        </a>
+      </div>
+    </main>
+                  
+</Layout>
+
+<style is:global>
+  /* 简单的 Typography 样式 */
+  article h2 {
+    font-size: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #2f2f2f;
+  }
+  article p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+    color: #4a4a4a;
+  }
+  article ul {
+    list-style-type: square;
+    margin-left: 1.5em;
+    color: #ff6b6b;
+  }
+  article li {
+    margin-bottom: 0.5em;
+  }
+  article li::marker {
+    color: #2f2f2f;
+  }
+</style>

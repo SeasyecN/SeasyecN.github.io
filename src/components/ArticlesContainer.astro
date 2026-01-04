@@ -1,15 +1,9 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import RetroCard from './RetroCard.jsx';
 
-interface Post {
-  id: number;
-  title: string;
-  date: string;
-  desc: string;
-}
-
 interface Props {
-  posts: Post[];
+  posts: CollectionEntry<'blog'>[];
 }
 
 const { posts } = Astro.props;
@@ -17,6 +11,13 @@ const { posts } = Astro.props;
 
 <div class="w-full max-w-[600px] px-4 space-y-8 pb-20">
   {posts.map((post) => (
-    <RetroCard client:visible {...post} />
+    <a href={`/blog/${post.slug}`} class="block no-underline">
+      <RetroCard 
+        client:visible 
+        title={post.data.title}
+        date={post.data.date.toISOString().split('T')[0]}
+        desc={post.data.desc}
+      />
+    </a>
   ))}
 </div>

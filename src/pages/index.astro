@@ -1,47 +1,21 @@
 ---
 // src/pages/index.astro
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import RetroBackground from "../components/RetroBackground.astro";
-import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import ArticlesContainer from "../components/ArticlesContainer.astro";
 
-// 模拟数据
-const posts = [
-  {
-    id: 1,
-    title: "Hello World",
-    date: "2025-10-01",
-    desc: "My first post in the 8-bit world.",
-  },
-  {
-    id: 2,
-    title: "Learning React",
-    date: "2025-10-05",
-    desc: "Why components are like LEGOs.",
-  },
-  {
-    id: 3,
-    title: "Pixel Art 101",
-    date: "2025-10-12",
-    desc: "Drawing with squares is fun!",
-  },
-];
+// 获取博客文章集合
+const allPosts = await getCollection("blog");
+// 按日期降序排列
+const posts = allPosts.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
 <Layout title="Retro Blog 8-bit Concept">
-  <!-- 背景层 -->
-  <RetroBackground />
-
-  <!-- 内容层 -->
-  <main class="relative z-10 min-h-screen flex flex-col items-center">
-    <!-- 页眉 -->
-    <Header>010</Header>
-    
-
-    <!-- 引导 / 简介 -->
-    <Hero >Welcome to the 8-Bit World _</Hero>
-    <!-- 文章容器 -->
-    <ArticlesContainer posts={posts} />
-  </main>
+  <!-- 引导 / 简介 -->
+  <Hero> To vibe code, or not to vibe code. That's the question.</Hero>
+  <!-- 文章容器 -->
+  <ArticlesContainer posts={posts} />
 </Layout>
