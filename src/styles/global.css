@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* 专门为中文定义一个放大版的字体 */
+@font-face {
+  font-family: "ChineseScaled";
+  /* 使用您刚才引入的 Noto Sans SC */
+  src: local("Noto Sans SC"), local("PingFang SC"), local("Microsoft YaHei");
+  /* 中文字符的 Unicode 范围 */
+  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+F900-FAFF, U+3000-303F, U+FF00-FFEF;
+  /* 仅放大中文比例，例如放大 25% */
+  size-adjust: 125%;
+}

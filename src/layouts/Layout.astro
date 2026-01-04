@@ -16,8 +16,10 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Bitcount:wght@100..900&family=Noto+Sans+SC:wght@100..900&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
@@ -38,7 +40,8 @@ const { title } = Astro.props;
 <style is:global>
   /* 定义全局像素字体 */
   .font-pixel {
-    font-family: "Press Start 2P", cursive;
+    /* 优先使用英文像素字体，中文则使用经过 size-adjust 放大的字体 */
+    font-family: "Press Start 2P", "ChineseScaled", cursive;
   }
 
   /* 定义复古滚动条 */
