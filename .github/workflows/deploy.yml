@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # 如果你的主分支叫 master，请修改这里
+    branches: [ main ] # 确保这里和你现在的分支名一致
 
 permissions:
   contents: read
@@ -10,6 +10,7 @@ permissions:
   id-token: write
 
 jobs:
+  # 阶段一：构建（你已经成功的部分）
   build:
     runs-on: ubuntu-latest
     steps:
@@ -17,4 +18,15 @@ jobs:
         uses: actions/checkout@v4
       - name: Install, build, and upload
         uses: withastro/action@v3
-        # 如果你使用了 pnpm，该 Action 会自动检测并处理
+
+  # 阶段二：部署（这是你缺失的部分）
+  deploy:
+    needs: build # 必须等构建成功后才开始
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # 调用官方的搬运工插件
