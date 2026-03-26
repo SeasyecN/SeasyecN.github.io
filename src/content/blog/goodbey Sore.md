@@ -6,7 +6,7 @@ author: "me"
 ---
 
 ![Good bye Sora](https://files.seeusercontent.com/2026/03/26/biQ8/pasted-image-1774546122531.webp)
-GOodbye Sora
+Goodbye Sora
 
 # Sore，从王者到坟墓
  
